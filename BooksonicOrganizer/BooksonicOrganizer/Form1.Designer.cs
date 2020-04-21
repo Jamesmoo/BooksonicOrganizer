@@ -37,7 +37,7 @@
             this.startButton = new System.Windows.Forms.Button();
             this.sourceBrowseButton = new System.Windows.Forms.Button();
             this.outputBrowseButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.processingTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -114,6 +114,7 @@
             this.sourceBrowseButton.TabIndex = 7;
             this.sourceBrowseButton.Text = "Browse";
             this.sourceBrowseButton.UseVisualStyleBackColor = true;
+            this.sourceBrowseButton.Click += new System.EventHandler(this.sourceBrowseButton_Click);
             // 
             // outputBrowseButton
             // 
@@ -123,22 +124,26 @@
             this.outputBrowseButton.TabIndex = 8;
             this.outputBrowseButton.Text = "Browse";
             this.outputBrowseButton.UseVisualStyleBackColor = true;
+            this.outputBrowseButton.Click += new System.EventHandler(this.outputBrowseButton_Click);
             // 
-            // textBox1
+            // processingTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 222);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(581, 200);
-            this.textBox1.TabIndex = 9;
+            this.processingTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.processingTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.processingTextBox.Location = new System.Drawing.Point(18, 222);
+            this.processingTextBox.Multiline = true;
+            this.processingTextBox.Name = "processingTextBox";
+            this.processingTextBox.ReadOnly = true;
+            this.processingTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.processingTextBox.Size = new System.Drawing.Size(581, 200);
+            this.processingTextBox.TabIndex = 9;
             // 
             // messageProcessingText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 450);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.processingTextBox);
             this.Controls.Add(this.outputBrowseButton);
             this.Controls.Add(this.sourceBrowseButton);
             this.Controls.Add(this.startButton);
@@ -166,7 +171,7 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button sourceBrowseButton;
         private System.Windows.Forms.Button outputBrowseButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox processingTextBox;
     }
 }
 
