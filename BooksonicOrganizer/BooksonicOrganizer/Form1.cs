@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BooksonicOrganizer
 {
-    public partial class Form1 : Form
+    public partial class messageProcessingText : Form
     {
-        public Form1()
+        public messageProcessingText()
         {
             InitializeComponent();
         }
@@ -23,6 +23,11 @@ namespace BooksonicOrganizer
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
         {
 
         }

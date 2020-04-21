@@ -1,6 +1,6 @@
 ﻿namespace BooksonicOrganizer
 {
-    partial class Form1
+    partial class messageProcessingText
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.sourceTextBox = new System.Windows.Forms.TextBox();
             this.outputTextBox = new System.Windows.Forms.TextBox();
+            this.startButton = new System.Windows.Forms.Button();
+            this.sourceBrowseButton = new System.Windows.Forms.Button();
+            this.outputBrowseButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -91,18 +95,60 @@
             this.outputTextBox.Size = new System.Drawing.Size(214, 20);
             this.outputTextBox.TabIndex = 5;
             // 
-            // Form1
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Location = new System.Drawing.Point(205, 170);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(192, 23);
+            this.startButton.TabIndex = 6;
+            this.startButton.Text = "Start Processing Files";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // sourceBrowseButton
+            // 
+            this.sourceBrowseButton.Location = new System.Drawing.Point(524, 77);
+            this.sourceBrowseButton.Name = "sourceBrowseButton";
+            this.sourceBrowseButton.Size = new System.Drawing.Size(75, 23);
+            this.sourceBrowseButton.TabIndex = 7;
+            this.sourceBrowseButton.Text = "Browse";
+            this.sourceBrowseButton.UseVisualStyleBackColor = true;
+            // 
+            // outputBrowseButton
+            // 
+            this.outputBrowseButton.Location = new System.Drawing.Point(524, 118);
+            this.outputBrowseButton.Name = "outputBrowseButton";
+            this.outputBrowseButton.Size = new System.Drawing.Size(75, 23);
+            this.outputBrowseButton.TabIndex = 8;
+            this.outputBrowseButton.Text = "Browse";
+            this.outputBrowseButton.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 222);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(581, 200);
+            this.textBox1.TabIndex = 9;
+            // 
+            // messageProcessingText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(624, 450);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.outputBrowseButton);
+            this.Controls.Add(this.sourceBrowseButton);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.sourceTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "messageProcessingText";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -117,6 +163,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox sourceTextBox;
         private System.Windows.Forms.TextBox outputTextBox;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button sourceBrowseButton;
+        private System.Windows.Forms.Button outputBrowseButton;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
