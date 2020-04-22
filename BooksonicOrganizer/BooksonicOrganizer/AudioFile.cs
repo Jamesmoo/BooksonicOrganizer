@@ -13,11 +13,13 @@ namespace BooksonicOrganizer
         public string audioFilePath {get; }
         public string audioFileAuthor { get; }
         public string audioFileAlbum { get; }
+        public TagLib.File audioFileObj { get; }
 
-        public AudioFile(string filePath, TagLib.File audioFile) {
+        public AudioFile(string filePath, TagLib.File myFile) {
+            audioFileObj = myFile;
             audioFilePath = filePath;
-            audioFileAuthor = CleanValueString(audioFile.Tag.AlbumArtists[0]);
-            audioFileAlbum = CleanValueString(audioFile.Tag.Album);
+            audioFileAuthor = CleanValueString(audioFileObj.Tag.AlbumArtists[0]);
+            audioFileAlbum = CleanValueString(audioFileObj.Tag.Album);
         }
 
         private string CleanValueString(string myValue) {
