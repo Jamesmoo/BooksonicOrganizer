@@ -48,7 +48,8 @@ namespace BooksonicOrganizer
             int totalCount = fileEntries.Count();
             
             foreach (var filePath in fileEntries) {
-                var audioFile = TagLib.File.Create(filePath);
+                TagLib.File audioFile = TagLib.File.Create(filePath);
+                AudioFile myFile = new AudioFile(filePath, audioFile);
 
                 this.processingTextBox.AppendText("---------------------------------\r\n");
                 this.processingTextBox.AppendText("File " + currentCount + " of " + totalCount + "\r\n");
@@ -62,6 +63,9 @@ namespace BooksonicOrganizer
 
                 string fileArtist = audioFile.Tag.Performers[0];
                 this.processingTextBox.AppendText("Artist: " + fileArtist + "\r\n");
+
+                //clean up the file attributes
+                
 
                 currentCount++;
             }
