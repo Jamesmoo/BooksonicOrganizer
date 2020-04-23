@@ -36,36 +36,42 @@ namespace BooksonicOrganizer
         {
             
             string targetDirectory = @"D:\booktest";
+            string outputDirectory = @"D:\booktestout";
+
             var fileEntries = Directory.EnumerateFiles(targetDirectory, "*.*", SearchOption.AllDirectories)
                  .Where(s => s.EndsWith(".mp3") || s.EndsWith(".m4b"));
 
             this.processingTextBox.AppendText("*** Starting ***\r\n");
 
-            ArrayList authorList = new ArrayList();
-            ArrayList albumList = new ArrayList();
+            ArrayList processedTitlesList = new ArrayList();
 
             int currentCount = 1;
             int totalCount = fileEntries.Count();
             
             foreach (var filePath in fileEntries) {
-                TagLib.File audioFile = TagLib.File.Create(filePath);
-                AudioFile myFile = new AudioFile(filePath, audioFile);
+                TagLib.File audioTagFile = TagLib.File.Create(filePath);
+                AudioFile myAudioFile = new AudioFile(filePath, audioTagFile);
 
                 this.processingTextBox.AppendText("---------------------------------\r\n");
                 this.processingTextBox.AppendText("File " + currentCount + " of " + totalCount + "\r\n");
-                this.processingTextBox.AppendText("File Name: " + filePath + "\r\n");
                 
-                string fileTitle = audioFile.Tag.Title.ToString();
-                this.processingTextBox.AppendText("Title: " + fileTitle + "\r\n");
+                this.processingTextBox.AppendText("File:   " + myAudioFile.audioFilePath + "\r\n");
+                this.processingTextBox.AppendText("Artist: " + myAudioFile.audioFileArtist + "\r\n");
+                this.processingTextBox.AppendText("Title:  " + myAudioFile.audioFileTitle + "\r\n");
+                this.processingTextBox.AppendText("Album:  " + myAudioFile.audioFileAlbum + "\r\n");
 
-                string fileAlbum = audioFile.Tag.Album.ToString();
-                this.processingTextBox.AppendText("Album: " + fileAlbum + "\r\n");
-
-                string fileArtist = audioFile.Tag.Performers[0];
-                this.processingTextBox.AppendText("Artist: " + fileArtist + "\r\n");
-
-                //clean up the file attributes
-                
+                if (!processedTitlesList.Contains(myAudioFile.audioFileTitle)) {
+                    if (AudioFileDirectory.OrganizeAudioFile(outputDirectory, myAudioFile))
+                    {
+                        //in case the same title is in the folder twice but with spaces we dont want to clash
+                        processedTitlesList.Add(myAudioFile.audioFileTitle);
+                        this.processingTextBox.AppendText("Completed Processing File");
+                    }
+                    else 
+                    {
+                        this.processingTextBox.AppendText("ERROR PROCESSING FILE");
+                    }
+                }
 
                 currentCount++;
             }

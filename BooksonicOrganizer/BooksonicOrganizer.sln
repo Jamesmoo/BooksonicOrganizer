@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksonicOrganizer", "BooksonicOrganizer\BooksonicOrganizer.csproj", "{7411FF6B-72D2-49F2-B803-26E0352BEEF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksonic-Unit-Tests", "Booksonic-Unit-Tests\Booksonic-Unit-Tests.csproj", "{C02343B1-6B00-4E7B-A7FC-A036F0F8A77A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7411FF6B-72D2-49F2-B803-26E0352BEEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7411FF6B-72D2-49F2-B803-26E0352BEEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7411FF6B-72D2-49F2-B803-26E0352BEEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C02343B1-6B00-4E7B-A7FC-A036F0F8A77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C02343B1-6B00-4E7B-A7FC-A036F0F8A77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C02343B1-6B00-4E7B-A7FC-A036F0F8A77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C02343B1-6B00-4E7B-A7FC-A036F0F8A77A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

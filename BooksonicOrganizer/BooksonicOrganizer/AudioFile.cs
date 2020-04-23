@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Drawing.Imaging;
 
 
 namespace BooksonicOrganizer
@@ -11,15 +12,44 @@ namespace BooksonicOrganizer
     public class AudioFile 
     {
         public string audioFilePath {get; }
-        public string audioFileAuthor { get; }
+        public string audioFileArtist { get; }
+        public string audioFileTitle{ get; }
         public string audioFileAlbum { get; }
         public TagLib.File audioFileObj { get; }
 
         public AudioFile(string filePath, TagLib.File myFile) {
             audioFileObj = myFile;
             audioFilePath = filePath;
-            audioFileAuthor = CleanValueString(audioFileObj.Tag.AlbumArtists[0]);
-            audioFileAlbum = CleanValueString(audioFileObj.Tag.Album);
+            Boolean changesMade = false;
+
+            string[] filePerformers = new[] { CleanValueString(audioFileObj.Tag.FirstPerformer) };
+            if (filePerformers.Length > 0) {
+                if (!audioFileObj.Tag.FirstPerformer.Equals(filePerformers[0])) {
+                    audioFileObj.Tag.Performers = filePerformers;
+                    changesMade = true;
+                }
+                audioFileArtist = filePerformers[0];
+            }
+
+            if (!string.IsNullOrEmpty(audioFileObj.Tag.Title)) {
+                audioFileTitle = CleanValueString(audioFileObj.Tag.Title);
+                if (!audioFileObj.Tag.Title.Equals(audioFileTitle)) {
+                    audioFileObj.Tag.Title = audioFileTitle;
+                    changesMade = true;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(audioFileObj.Tag.Album)) {
+                audioFileAlbum = CleanValueString(audioFileObj.Tag.Album);
+                if (!audioFileObj.Tag.Album.Equals(audioFileAlbum)) {
+                    audioFileObj.Tag.Album = audioFileAlbum;
+                    changesMade = true;
+                }           
+            }
+
+            if (changesMade) {
+                audioFileObj.Save();
+            }
         }
 
         private string CleanValueString(string myValue) {
