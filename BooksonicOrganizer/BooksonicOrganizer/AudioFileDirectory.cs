@@ -10,7 +10,6 @@ namespace BooksonicOrganizer
     public static class AudioFileDirectory
     {
         public static Boolean OrganizeAudioFile(string outputDirectory, AudioFile myAudioFile) {
-            Boolean success = true;
             try
             {
                 //check if there is an artist folder
@@ -18,43 +17,40 @@ namespace BooksonicOrganizer
                 {
                     string artistPath = outputDirectory + @"\" + myAudioFile.audioFileArtist;
                     string albumPath = artistPath + @"\" + myAudioFile.audioFileAlbum;
-                    LogFile.AppendActionLog("Artist Path Directory: " + artistPath);
-                    LogFile.AppendActionLog("Artist Path Directory: " + albumPath);
 
                     if (!Directory.Exists(artistPath)) {
-                        LogFile.AppendActionLog("Artist path does not exist");
                         Directory.CreateDirectory(artistPath);
                     }
 
-                    if (!Directory.Exists(albumPath)) {
-                        LogFile.AppendActionLog("Album path does not exist");
+                    if (!Directory.Exists(albumPath))
+                    {
                         Directory.CreateDirectory(albumPath);
+                    }
+                    else 
+                    {
+                        Console.WriteLine("ERROR - the album path exists already");
+                        return false;
                     }
 
                     string[] parts = myAudioFile.audioFilePath.Split('\\');
                     string fileName = parts[parts.Length - 1];
-                    LogFile.AppendActionLog("File Name: " + fileName);
-
+             
                     string origin = myAudioFile.audioFilePath;
                     string destination = albumPath + @"\" + fileName;
                     File.Copy(origin, destination, false);
-                    LogFile.AppendActionLog("Copied file from: " + origin);
-                    LogFile.AppendActionLog("Copied file to: " + destination);
+                    return true;
                 }
                 else 
                 {
-                    LogFile.AppendActionLog("ERROR: output folder does not exist");
                     Console.WriteLine("ERROR: output folder does not exist");
-                    success = false;  
+                    return false;  
                 }
             }
             catch (Exception ex)
             {
-                LogFile.AppendActionLog("EXCEPTION: " + ex);
                 Console.WriteLine(ex);
-                success = false;
+                return false;
             }
-            return success;
         }
     }
 }

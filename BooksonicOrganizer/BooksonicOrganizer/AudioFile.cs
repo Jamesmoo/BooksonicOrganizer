@@ -14,52 +14,18 @@ namespace BooksonicOrganizer
     {
         public string audioFilePath {get; }
         public string audioFileArtist { get; }
-        public string audioFileTitle{ get; }
         public string audioFileAlbum { get; }
-        public TagLib.File audioFileObj { get; }
 
         public AudioFile(string filePath, TagLib.File myFile) {
-            audioFileObj = myFile;
             audioFilePath = filePath;
-            Boolean changesMade = false;
-            LogFile.AppendActionLog("Starting ID3 Tag process..");
-
-            string[] filePerformers = new[] { CleanValueString(audioFileObj.Tag.FirstPerformer) };
-            if (filePerformers.Length > 0) {
-                if (!audioFileObj.Tag.FirstPerformer.Equals(filePerformers[0])) {
-                    audioFileObj.Tag.Performers = filePerformers;
-                    changesMade = true;
-                }
-                audioFileArtist = filePerformers[0];
-            }
-
-            if (!string.IsNullOrEmpty(audioFileObj.Tag.Title)) {
-                audioFileTitle = CleanValueString(audioFileObj.Tag.Title);
-                if (!audioFileObj.Tag.Title.Equals(audioFileTitle)) {
-                    audioFileObj.Tag.Title = audioFileTitle;
-                    changesMade = true;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(audioFileObj.Tag.Album)) {
-                audioFileAlbum = CleanValueString(audioFileObj.Tag.Album);
-                if (!audioFileObj.Tag.Album.Equals(audioFileAlbum)) {
-                    audioFileObj.Tag.Album = audioFileAlbum;
-                    changesMade = true;
-                }
-            }
-
-            if (changesMade) {
-                audioFileObj.Save();
-                LogFile.AppendActionLog("Changes Saved");
-                LogFile.AppendActionLog("Artist Now: '" + audioFileObj.Tag.Performers[0] + "'");
-                LogFile.AppendActionLog("Title Now: '" + audioFileObj.Tag.Title + "'");
-                LogFile.AppendActionLog("Album Now: '" + audioFileObj.Tag.Album + "'");
-            }
+            audioFileArtist = CleanValueString(myFile.Tag.FirstPerformer);
+            audioFileAlbum = CleanValueString(myFile.Tag.Album);
         }
 
+        /*
+         * Need to remove any characters that would be problematic when it comes to creating directories
+         */
         private string CleanValueString(string myValue) {
-            LogFile.AppendActionLog("Cleaning value from : '" + myValue + "'");
             myValue = myValue.Trim();
             
             //change encoding to UTF-8
@@ -81,7 +47,6 @@ namespace BooksonicOrganizer
             temp = myValue.Split(invalidFileNameChars, StringSplitOptions.RemoveEmptyEntries);
             myValue = String.Join("\n", temp);
 
-            LogFile.AppendActionLog("Cleaning value to :'" + myValue + "'");
             return myValue;
         }
     }
