@@ -34,9 +34,12 @@ namespace BooksonicOrganizer
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            
+
             string targetDirectory = @"F:\Audiobooks-OrganizedSingleFolder";
             string outputDirectory = @"F:\Audiobooks-Booksonic";
+
+            //string targetDirectory = @"F:\TestSource";
+            //string outputDirectory = @"F:\TestOut";
 
             var fileEntries = Directory.EnumerateFiles(targetDirectory, "*.*", SearchOption.AllDirectories)
                  .Where(s => s.EndsWith(".mp3") || s.EndsWith(".m4b"));

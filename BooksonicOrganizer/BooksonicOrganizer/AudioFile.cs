@@ -42,10 +42,10 @@ namespace BooksonicOrganizer
             char[] invalidFileNameChars = Path.GetInvalidFileNameChars();
 
             string[] temp = myValue.Split(folderNameNotAllowedChard, StringSplitOptions.RemoveEmptyEntries);
-            myValue = String.Join("\n", temp);
+            myValue = String.Join(" - ", temp);
 
             temp = myValue.Split(invalidFileNameChars, StringSplitOptions.RemoveEmptyEntries);
-            myValue = String.Join("\n", temp);
+            myValue = String.Join(" - ", temp);
 
             return myValue;
         }

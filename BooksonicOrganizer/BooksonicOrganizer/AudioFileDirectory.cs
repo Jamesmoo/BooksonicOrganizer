@@ -12,7 +12,6 @@ namespace BooksonicOrganizer
         public static Boolean OrganizeAudioFile(string outputDirectory, AudioFile myAudioFile) {
             try
             {
-                //check if there is an artist folder
                 if (Directory.Exists(outputDirectory))
                 {
                     string artistPath = outputDirectory + @"\" + myAudioFile.audioFileArtist;
