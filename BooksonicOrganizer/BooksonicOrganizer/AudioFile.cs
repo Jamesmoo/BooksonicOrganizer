@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Drawing.Imaging;
+using System.IO;
 
 
 namespace BooksonicOrganizer
@@ -21,6 +22,7 @@ namespace BooksonicOrganizer
             audioFileObj = myFile;
             audioFilePath = filePath;
             Boolean changesMade = false;
+            LogFile.AppendActionLog("Starting ID3 Tag process..");
 
             string[] filePerformers = new[] { CleanValueString(audioFileObj.Tag.FirstPerformer) };
             if (filePerformers.Length > 0) {
@@ -44,15 +46,20 @@ namespace BooksonicOrganizer
                 if (!audioFileObj.Tag.Album.Equals(audioFileAlbum)) {
                     audioFileObj.Tag.Album = audioFileAlbum;
                     changesMade = true;
-                }           
+                }
             }
 
             if (changesMade) {
                 audioFileObj.Save();
+                LogFile.AppendActionLog("Changes Saved");
+                LogFile.AppendActionLog("Artist Now: '" + audioFileObj.Tag.Performers[0] + "'");
+                LogFile.AppendActionLog("Title Now: '" + audioFileObj.Tag.Title + "'");
+                LogFile.AppendActionLog("Album Now: '" + audioFileObj.Tag.Album + "'");
             }
         }
 
         private string CleanValueString(string myValue) {
+            LogFile.AppendActionLog("Cleaning value from : '" + myValue + "'");
             myValue = myValue.Trim();
             
             //change encoding to UTF-8
@@ -64,6 +71,17 @@ namespace BooksonicOrganizer
             Regex regex = new Regex("[ ]{2,}", options);
             myValue = regex.Replace(myValue, " ");
 
+
+            char[] folderNameNotAllowedChard = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>','\r', '\t', '\n' };
+            char[] invalidFileNameChars = Path.GetInvalidFileNameChars();
+
+            string[] temp = myValue.Split(folderNameNotAllowedChard, StringSplitOptions.RemoveEmptyEntries);
+            myValue = String.Join("\n", temp);
+
+            temp = myValue.Split(invalidFileNameChars, StringSplitOptions.RemoveEmptyEntries);
+            myValue = String.Join("\n", temp);
+
+            LogFile.AppendActionLog("Cleaning value to :'" + myValue + "'");
             return myValue;
         }
     }

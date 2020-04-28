@@ -47,8 +47,11 @@ namespace BooksonicOrganizer
 
             int currentCount = 1;
             int totalCount = fileEntries.Count();
-            
+
+            LogFile.CreateLogFile();
             foreach (var filePath in fileEntries) {
+                LogFile.AppendNewFileLog(filePath);
+
                 TagLib.File audioTagFile = TagLib.File.Create(filePath);
                 AudioFile myAudioFile = new AudioFile(filePath, audioTagFile);
 
@@ -60,18 +63,18 @@ namespace BooksonicOrganizer
                 this.processingTextBox.AppendText("Title:  " + myAudioFile.audioFileTitle + "\r\n");
                 this.processingTextBox.AppendText("Album:  " + myAudioFile.audioFileAlbum + "\r\n");
 
-                if (!processedTitlesList.Contains(myAudioFile.audioFileTitle)) {
-                    if (AudioFileDirectory.OrganizeAudioFile(outputDirectory, myAudioFile))
-                    {
-                        //in case the same title is in the folder twice but with spaces we dont want to clash
-                        processedTitlesList.Add(myAudioFile.audioFileTitle);
-                        this.processingTextBox.AppendText("Completed Processing File");
-                    }
-                    else 
-                    {
-                        this.processingTextBox.AppendText("ERROR PROCESSING FILE");
-                    }
+
+                if (AudioFileDirectory.OrganizeAudioFile(outputDirectory, myAudioFile))
+                {
+                    //in case the same title is in the folder twice but with spaces we dont want to clash
+                    processedTitlesList.Add(myAudioFile.audioFileTitle);
+                    this.processingTextBox.AppendText("Completed Processing File\r\n");
                 }
+                else 
+                {
+                    this.processingTextBox.AppendText("ERROR PROCESSING FILE\r\n");
+                }
+                
 
                 currentCount++;
             }
