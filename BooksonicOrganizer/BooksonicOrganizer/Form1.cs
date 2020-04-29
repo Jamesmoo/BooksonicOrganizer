@@ -72,10 +72,10 @@ namespace BooksonicOrganizer
 
                     this.processingTextBox.AppendText("*** Starting ***\r\n");
 
-                    int currentCount = 0;
+                    int currentCount = 1;
                     int totalCount = fileEntries.Count();
 
-                    this.fileProgressBar.Minimum = 0;
+                    this.fileProgressBar.Minimum = 1;
                     this.fileProgressBar.Maximum = totalCount;
                     //this.progressLabel.Text = "Total Files to Process: " + totalCount;
 
@@ -99,7 +99,7 @@ namespace BooksonicOrganizer
                                 break;
 
                             case DirectoryProcessingCode.ALBUM_FILE_ALREADY_EXISTS:
-                                this.processingTextBox.AppendText("ERROR: Audiobook file already exists\r\n");
+                                this.processingTextBox.AppendText("WARNING: Audiobook file already exists\r\n");
                                 break;
 
                             case DirectoryProcessingCode.EXCEPTION_ERROR:
