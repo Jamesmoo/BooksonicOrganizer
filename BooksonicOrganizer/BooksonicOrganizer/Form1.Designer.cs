@@ -38,6 +38,9 @@
             this.sourceBrowseButton = new System.Windows.Forms.Button();
             this.outputBrowseButton = new System.Windows.Forms.Button();
             this.processingTextBox = new System.Windows.Forms.TextBox();
+            this.fileProgressBar = new System.Windows.Forms.ProgressBar();
+            this.progressLabel = new System.Windows.Forms.Label();
+            this.folderMessageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -97,8 +100,9 @@
             // 
             // startButton
             // 
+            this.startButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(205, 170);
+            this.startButton.Location = new System.Drawing.Point(407, 188);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(192, 23);
             this.startButton.TabIndex = 6;
@@ -108,6 +112,7 @@
             // 
             // sourceBrowseButton
             // 
+            this.sourceBrowseButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sourceBrowseButton.Location = new System.Drawing.Point(524, 77);
             this.sourceBrowseButton.Name = "sourceBrowseButton";
             this.sourceBrowseButton.Size = new System.Drawing.Size(75, 23);
@@ -118,6 +123,7 @@
             // 
             // outputBrowseButton
             // 
+            this.outputBrowseButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.outputBrowseButton.Location = new System.Drawing.Point(524, 118);
             this.outputBrowseButton.Name = "outputBrowseButton";
             this.outputBrowseButton.Size = new System.Drawing.Size(75, 23);
@@ -131,19 +137,50 @@
             this.processingTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.processingTextBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.processingTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.processingTextBox.Location = new System.Drawing.Point(18, 222);
+            this.processingTextBox.Location = new System.Drawing.Point(18, 231);
             this.processingTextBox.Multiline = true;
             this.processingTextBox.Name = "processingTextBox";
             this.processingTextBox.ReadOnly = true;
             this.processingTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.processingTextBox.Size = new System.Drawing.Size(581, 200);
+            this.processingTextBox.Size = new System.Drawing.Size(581, 191);
             this.processingTextBox.TabIndex = 9;
+            // 
+            // fileProgressBar
+            // 
+            this.fileProgressBar.Location = new System.Drawing.Point(72, 189);
+            this.fileProgressBar.Name = "fileProgressBar";
+            this.fileProgressBar.Size = new System.Drawing.Size(237, 23);
+            this.fileProgressBar.TabIndex = 10;
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Location = new System.Drawing.Point(18, 193);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(51, 13);
+            this.progressLabel.TabIndex = 11;
+            this.progressLabel.Text = "Progress:";
+            this.progressLabel.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // folderMessageLabel
+            // 
+            this.folderMessageLabel.AutoSize = true;
+            this.folderMessageLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.folderMessageLabel.ForeColor = System.Drawing.Color.Black;
+            this.folderMessageLabel.Location = new System.Drawing.Point(262, 152);
+            this.folderMessageLabel.Name = "folderMessageLabel";
+            this.folderMessageLabel.Size = new System.Drawing.Size(140, 15);
+            this.folderMessageLabel.TabIndex = 12;
+            this.folderMessageLabel.Text = "No Folders Selected";
             // 
             // messageProcessingText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 450);
+            this.Controls.Add(this.folderMessageLabel);
+            this.Controls.Add(this.progressLabel);
+            this.Controls.Add(this.fileProgressBar);
             this.Controls.Add(this.processingTextBox);
             this.Controls.Add(this.outputBrowseButton);
             this.Controls.Add(this.sourceBrowseButton);
@@ -155,7 +192,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "messageProcessingText";
-            this.Text = "Form1";
+            this.Text = "No Folders Selected";
+            this.Load += new System.EventHandler(this.messageProcessingText_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +211,9 @@
         private System.Windows.Forms.Button sourceBrowseButton;
         private System.Windows.Forms.Button outputBrowseButton;
         private System.Windows.Forms.TextBox processingTextBox;
+        private System.Windows.Forms.ProgressBar fileProgressBar;
+        private System.Windows.Forms.Label progressLabel;
+        private System.Windows.Forms.Label folderMessageLabel;
     }
 }
 
